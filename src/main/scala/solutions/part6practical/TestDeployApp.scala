@@ -73,6 +73,6 @@ object TestDeployApp {
     *     --deploy-mode client \
     *     --verbose \
     *     --supervise \
-    *     spark-essentials.jar /opt/spark-data/movies.json /opt/spark-data/goodMovies
+    *     /opt/spark-apps/spark-essentials.jar /opt/spark-data/movies.json /opt/spark-data/goodMovies
     */
 }
