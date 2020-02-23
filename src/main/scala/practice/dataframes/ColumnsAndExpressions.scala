@@ -81,6 +81,25 @@ val europeanCarsDf2 = carsDf.where(col("Origin") =!= "USA")
   // Distinct
   val allCountries = carsDf.select("Origin").distinct()
   allCountries.show()
+
+  /**
+    * 1. Read movies, select 2 cols of choice
+    * 2. Create a new col, summing up total profit
+    * 3. Select all comedies with IMDB rating above 6
+    */
+
+  val moviesDf = spark.read.option("inferSchema", "true").json("src/main/resources/data/movies.json")
+
+  // 1
+  val moviesColDf = moviesDf.select("Title", "Release_Date")
+  val moviesColDf2 = moviesDf.select(col("Title"), col("Release_Date"))
+  val moviesColDf3 = moviesDf.select($"Title", $"Release_Date")
+
+  // 2
+  val moviesProfitDf = moviesDf.withColumn("Total_Profit", $"US_Gross" + $"Worldwide_Gross" + $"US_DVD_Sales")
+
+  // 3
+  val goodComediesDf = moviesDf.filter($"Major_Genre" === "Comedy" and $"IMDB_Rating" > 6)
 }
 
 
