@@ -41,5 +41,27 @@ object ComplexTypes extends App {
   val stocksWithParseDate = stocksDf.select(
     col("symbol"),
     to_date(col("date"), "MMM d yyyy"))
+
+  // Structures
+
+  // 1 - with column operators
+  moviesDf.select(
+    col("Title"),
+    struct(col("US_Gross"), col("Worldwide_Gross")).as("Profit"))
+    .select(col("Title"), col("Profit").getField("US_Gross").as("US_Profit"))
     .show()
+
+  // 2 - with expression strings
+  moviesDf.selectExpr("Title", "(US_Gross, Worldwide_Gross) as Profit")
+    .selectExpr("Title", "Profit.US_Gross")
+    .show()
+
+  // Arrays
+  val moviesWithWordsDf = moviesDf.select(col("Title"), split(col("Title"), " |,").as("Title_Words")) // array of strings
+  moviesWithWordsDf.select(
+    col("Title"),
+    expr("Title_Words[0]"),
+    size(col("Title_Words")),
+    array_contains(col("Title_Words"), "Love")
+  )
 }
