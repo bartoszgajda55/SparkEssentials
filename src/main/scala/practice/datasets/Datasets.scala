@@ -45,4 +45,40 @@ object Datasets extends App {
 
   // map, flatMap, folds, reduce, filter, for comprehensions, etc.
   val carNamesDs = carsDs.map(car => car.Name.toUpperCase())
+
+  // Joins
+  case class Guitar(id: Long, make: String, model: String, guitarType: String)
+  case class GuitarPlayer(id: Long, name: String, guitars: Seq[Long], band: Long)
+  case class Band(id: Long, name: String, hometown: String, year: Long)
+
+  val guitarsDs = readDf("guitars.json").as[Guitar]
+  val guitarPlayersDs = readDf("guitarPlayers.json").as[GuitarPlayer]
+  val bandsDs = readDf("bands.json").as[Band]
+
+  val guitarPlayerBandsDs: Dataset[(GuitarPlayer, Band)] = guitarPlayersDs.joinWith(bandsDs, guitarPlayersDs.col("band") === bandsDs.col("id"), "inner")
+
+  /**
+    * Exercise:
+    * 1. Join guitarsDs and guitarPlayersDs, array_contains, outer join
+    */
+  val guitarGuitarPlayerDs = guitarsDs.joinWith(guitarPlayersDs, array_contains(guitarPlayersDs.col("guitars"), guitarsDs.col("id")), "outer")
+
+  // Grouping
+  val carsGroupedByOrigin = carsDs.groupByKey(_.Origin).count()
+  carsGroupedByOrigin.show()
+
+  // Joins and groups are WIDE transformations
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
