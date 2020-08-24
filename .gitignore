@@ -13,6 +13,12 @@
 .idea/**/dictionaries
 .idea/**/shelf
 
+.metals/
+classes/
+spark-cluster/apps/
+spark-cluster/data/
+src/META-INF
+
 # Generated files
 .idea/**/contentModel.xml
 
