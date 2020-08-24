@@ -2,9 +2,9 @@ name := "SparkEssentials"
 
 version := "1.0.0"
 
-scalaVersion := "2.12.10"
+scalaVersion := "2.12.12"
 
-val sparkVersion = "3.0.0-preview"
+val sparkVersion = "3.0.0"
 val vegasVersion = "0.3.11"
 val postgresVersion = "42.2.2"
 
