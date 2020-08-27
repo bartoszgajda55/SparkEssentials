@@ -1,4 +1,4 @@
-package practice.dataframes
+package practice.part2dataframes
 
 import org.apache.spark.sql.{SaveMode, SparkSession}
 import org.apache.spark.sql.types.{DateType, DoubleType, LongType, StringType, StructField, StructType}

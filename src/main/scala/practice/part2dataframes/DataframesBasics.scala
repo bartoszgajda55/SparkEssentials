@@ -1,4 +1,4 @@
-package practice.dataframes
+package practice.part2dataframes
 
 import org.apache.spark.sql.Row
 import org.apache.spark.sql.SparkSession
